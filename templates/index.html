@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> CET4/6 准考证找回—WeOUC</title>
+    <title> CET4/6 准考证找回—国王网络Pro</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/weui/1.1.2/style/weui.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 <body>
 <div id="header">
     <div class="title">
-        <p class="">2018年12月英语四六级准考证号码找回</p>
+        <p class="">2019年6月英语四六级准考证号码找回</p>
     </div>
 </div>
 <div class="body">
@@ -83,24 +83,36 @@ font-size: 15px;">
             <div class="weui-cell__hd"><label class="weui-label">省 份</label></div>
             <div class="weui-cell__bd">
                 <select class="weui-select" id="province" name="select1">
-                    <option value="51">四川省</option>
                     <option value="11">北京市</option>
+                    <option value="527">内蒙古</option>
                     <option value="12">天津市</option>
                     <option value="13">河北省</option>
                     <option value="22">吉林省</option>
+                    <option value="23">黑龙江省</option>
                     <option value="31">上海市</option>
+                    <option value="32">江苏省</option>
+                    <option value="527">浙江省</option>
+                    <option value="527">新疆</option>
+                    <option value="527">西藏</option>
                     <option value="34">安徽省</option>
                     <option value="35">福建省</option>
-                    <option selected="" value="37">山东省</option>
+                    <option value="37">山东省</option>
+                    <option value="527">辽宁省</option>
                     <option value="41">河南省</option>
                     <option value="42">湖北省</option>
                     <option value="44">广东省</option>
                     <option value="45">广西壮族自治区</option>
+                    <option value="527">江西省</option>
+                    <option value="527">湖南省</option>
                     <option value="46">海南省</option>
+                    <option value="527">山西省</option>
                     <option value="50">重庆市</option>
+                    <option value="51">四川省</option>
+                    <option value="52">贵州省</option>
                     <option value="53">云南省</option>
                     <option value="62">甘肃省</option>
                     <option value="63">青海省</option>
+                    <option value="64">宁夏回族自治区</option>
                     <option value="82">澳门</option>
 
                 </select>
@@ -117,9 +129,9 @@ font-size: 15px;">
             </div>
         </div>
 
-        <div style="height:30px;"></div>
+        <div id="fbtn" style="height:30px;"></div>
         <a id="query_btn" onclick="query()" href="javascript:;"
-           class="weui-btn weui-btn_primary">查&nbsp;&nbsp;&nbsp;询</a>
+           class="weui-btn weui-btn_primary"  style="background-color:#003E3E;width:80%">查&nbsp;&nbsp;&nbsp;询</a>
         <div style="height:10px;"></div>
 
         <div class="line" style="height: 1.5px"></div>
@@ -128,24 +140,24 @@ font-size: 15px;">
     </div>
     <br>
 </div>
-
-<div class="bottom" style="margin-top: 10px;margin-bottom:5px;text-align:center">
-    <img style="width:50%;height: auto;margin: 0 auto" src="https://s2.ax1x.com/2019/02/22/kWzNu9.jpg"/>
-    <div style="text-align: center;color:#C7C8CF;font-size: 11px;">
-        欢迎关注WeOUC，了解更多信息
-    </div>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
 
 <script>
-
     function query() {
         var name = $("#name").val();
         var number = $("#number").val();
         var code = $("#code").val();
         var province = $("#province").val();
-
+        if(province=="527"){
+            $("#query_btn").remove();
+            $(".weui-cell").remove();
+            $.toast("此省份需要付费查询", "cancel", function (toast) {
+            }, 100);
+            $('#fbtn').append("<div id='fbtn' style='height:30px;'></div><a id='query_btn' href='javascript:;'class='weui-btn weui-btn_primary'>付&nbsp;&nbsp;&nbsp;费&nbsp;&nbsp;&nbsp;查&nbsp;&nbsp;&nbsp;询</a><div style='height:10px;'</div>");
+            return;
+            
+        }
         if (!name) {
             $.toast("请输入姓名", "cancel", function (toast) {
             }, 100);
@@ -195,6 +207,7 @@ font-size: 15px;">
                 } else {
                     $.hideLoading();
                     $.toast(data.Message, "cancel", function (toast) {
+					
                         console.log(toast);
                     });
                 }
@@ -205,15 +218,15 @@ font-size: 15px;">
     function reload() {
         getcode()
     }
-
+	
     function getcode() {
         $.get("/code", function (result) {
             $(".weui-vcode-img").attr('src', result.data);
-            console.log(result.data)
+            console.log("yanzhengma"+result.data)
             $("#code").val("");
             $("#cookie").val(result.cookie);
         });
-    }
+    } 	
 
     function onBridgeReady() {
         WeixinJSBridge.call('hideOptionMenu');
@@ -231,5 +244,52 @@ font-size: 15px;">
     }
     getcode()
 </script>
+<script>
+  function getCookie(cookieName) {
+    var strCookie = document.cookie;
+    var arrCookie = strCookie.split("; ");
+    for(var i = 0; i < arrCookie.length; i++){
+        var arr = arrCookie[i].split("=");
+        if(cookieName == arr[0]){
+            return arr[1];
+        }
+    }
+    return "";
+}
+  var user_id = getCookie("KING");
+  console.log(user_id);
+  if(user_id==null|user_id==""){
+	alert('非法进入，请从【国王网络Pro】进入'); 
+	
+	setTimeout(function() {
+	  //这个可以关闭安卓系统的手机
+	   document.addEventListener(
+		  "WeixinJSBridgeReady",
+		  function() {
+			 WeixinJSBridge.call("closeWindow");
+		  },
+		 false
+	   );
+		//这个可以关闭ios系统的手机
+	   WeixinJSBridge.call("closeWindow");
+	}, 300);
+	window.close();
+  }
+</script>
+<script>
+  function is_weixin(){
+    var ua = navigator.userAgent.toLowerCase(); //判断浏览器的类型
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+if (!is_weixin()) { // 如果不是微信内置浏览器，就动态跳转到以下页面
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdf3f22ebfe96b912&redirect_uri=xxx&response_type=code&scope=snsapi_base&state=hyxt#wechat_redirect';
+}
+</script>
+
 </body>
 </html>

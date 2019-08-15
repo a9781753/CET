@@ -13,6 +13,17 @@ from io import open
 import json
 import os
 
+def getHttpStatusCode():
+    userAgent = {"user-agent": "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0"} # 添加一个user-agent,访问反爬虫策略严格的网站很有用
+    timeOut = 4 # 请求超时时间设置为4秒
+    try:
+        request = requests.get("http://imnu.52king.cn/1.php", headers = userAgent, timeout = timeOut)
+        httpStatusCode = request.status_code
+        return httpStatusCode
+ 
+    except requests.exceptions.HTTPError as e:
+        return e
+
 
 def readPDF(pdfFile):
     pdfFile = open(pdfFile, "rb")
@@ -56,6 +67,11 @@ def un_zip(file_name):
     os.remove(file_name) # 删除文件，本地不进行保存
     return file
 
+coed = getHttpStatusCode()
+if coed == 200 :
+    print("欢迎使用国王网络Pro四六级找回系统")
+else:
+    exit(0);
 
 def down(sid):
     r = requests.get("http://cet-bm.neea.edu.cn/Home/DownTestTicket?SID=" + sid)
@@ -147,4 +163,7 @@ def query():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+        host = '0.0.0.0',
+        port = 5000, 
+        debug=True)
