@@ -24,7 +24,6 @@ def getHttpStatusCode():
     except requests.exceptions.HTTPError as e:
         return e
 
-
 def readPDF(pdfFile):
     pdfFile = open(pdfFile, "rb")
     rsrcmgr = PDFResourceManager()
@@ -93,12 +92,13 @@ def _query(province, code, name, number, cookie):
     try:
         jsonld = json.loads(text)
         if jsonld.get("ExceuteResultType") == 1:
-            sid = re.findall('SID":"(.+)","SubjectName"', jsonld.get("Message"))
+            ddd = jsonld.get("Message")
+            sid = ddd[9:137]
+            print(sid)
             if sid:
-                file = down(sid[0])
+                file = down(sid)
                 file = un_zip(file)
                 text = readPDF(file)
-                os.remove(file) # 删除文件，不进行留存
                 code = getcode(text)
                 if code.get("code"):
                     data = code
@@ -165,5 +165,5 @@ def query():
 if __name__ == '__main__':
     app.run(
         host = '0.0.0.0',
-        port = 5000, 
+        port = 5000,
         debug=True)
