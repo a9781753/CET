@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> CET4/6 准考证找回—国王网络Pro</title>
+    <title>四六级准考证查询</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/weui/1.1.2/style/weui.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 <body>
 <div id="header">
     <div class="title">
-        <p class="">2019年6月英语四六级准考证号码找回</p>
+        <p class="">2019年3月英语四六级准考证号码找回</p>
     </div>
 </div>
 <div class="body">
@@ -83,45 +83,37 @@ font-size: 15px;">
             <div class="weui-cell__hd"><label class="weui-label">省 份</label></div>
             <div class="weui-cell__bd">
                 <select class="weui-select" id="province" name="select1">
-                    <option value="11">北京市</option>
-                    <option value="527">内蒙古</option>
-                    <option value="12">天津市</option>
-                    <option value="13">河北省</option>
-                    <option value="22">吉林省</option>
-                    <option value="23">黑龙江省</option>
-                    <option value="31">上海市</option>
-                    <option value="32">江苏省</option>
-                    <option value="527">浙江省</option>
-                    <option value="527">新疆</option>
-                    <option value="527">西藏</option>
-                    <option value="34">安徽省</option>
-                    <option value="35">福建省</option>
-                    <option value="37">山东省</option>
-                    <option value="527">辽宁省</option>
-                    <option value="41">河南省</option>
-                    <option value="42">湖北省</option>
-                    <option value="44">广东省</option>
-                    <option value="45">广西壮族自治区</option>
-                    <option value="527">江西省</option>
-                    <option value="527">湖南省</option>
-                    <option value="46">海南省</option>
-                    <option value="527">山西省</option>
-                    <option value="50">重庆市</option>
-                    <option value="51">四川省</option>
-                    <option value="52">贵州省</option>
-                    <option value="53">云南省</option>
-                    <option value="62">甘肃省</option>
-                    <option value="63">青海省</option>
-                    <option value="64">宁夏回族自治区</option>
-                    <option value="82">澳门</option>
+                     <option value="11">北京市</option>
+					<option value="12">天津市</option>
+					<option value="13">河北省</option>
+					<option value="22">吉林省</option>
+					<option value="23">黑龙江省</option>
+					<option value="31">上海市</option>
+					<option value="32">江苏省</option>
+					<option value="34">安徽省</option>
+					<option value="35">福建省</option>
+					<option value="37">山东省</option>
+					<option value="41">河南省</option>
+					<option value="42">湖北省</option>
+					<option value="44">广东省</option>
+					<option value="45">广西壮族自治区</option>
+					<option value="46">海南省</option>
+					<option value="50">重庆市</option>
+					<option value="51">四川省</option>
+					<option value="52">贵州省</option>
+					<option value="53">云南省</option>
+					<option value="62">甘肃省</option>
+					<option value="63">青海省</option>
+					<option value="64">宁夏回族自治区</option>
 
                 </select>
             </div>
         </div>
-        
-        <div id="fbtn" style="height:30px;"></div>
+
+
+        <div style="height:30px;"></div>
         <a id="query_btn" onclick="query()" href="javascript:;"
-           class="weui-btn weui-btn_primary"  style="background-color:#003E3E;width:80%">查&nbsp;&nbsp;&nbsp;询</a>
+           class="weui-btn weui-btn_primary">查&nbsp;&nbsp;&nbsp;询</a>
         <div style="height:10px;"></div>
 
         <div class="line" style="height: 1.5px"></div>
@@ -139,15 +131,6 @@ font-size: 15px;">
         var number = $("#number").val();
         var code = $("#code").val();
         var province = $("#province").val();
-        if(province=="527"){
-            $(".title").remove();
-            $(".body").remove();
-            $.toast("此省份需要付费查询", "cancel", function (toast) {}, 200);
-			location.href="http://imnu.52king.cn/jwimnu/jiefeng/cettijiao.php";
-            // $('#header').append("<h1>此省份21日开启找回功能</h1>");
-            return;
-            
-        }
         if (!name) {
             $.toast("请输入姓名", "cancel", function (toast) {
             }, 100);
@@ -158,11 +141,7 @@ font-size: 15px;">
             }, 100);
             return;
         }
-        if (!code) {
-            $.toast("请输入验证码", "cancel", function (toast) {
-            }, 100);
-            return;
-        }
+    
 
         $("#query_btn").text("正在查询...");
         //$.showLoading();
@@ -196,8 +175,6 @@ font-size: 15px;">
                     $("#top").hide();
                 } else {
                     $.hideLoading();
-                    else {
-                    $.hideLoading();
                     if(data.Message=="验证码错误"){
 					reload();
 					}
@@ -207,7 +184,7 @@ font-size: 15px;">
     }
 
     function reload() {
-        getcode()
+       query()
     }
 	
     function getcode() {
@@ -247,32 +224,9 @@ font-size: 15px;">
     }
     return "";
 }
-  var nowtime = Date.parse( new Date() ).toString();
-  nowtime = parseInt(nowtime);
-  var user_id = getCookie("KING");
-  gettime = parseInt(user_id) + 5000;
-  console.log("xianzai:"+user_id);
-   console.log("dedao:"+gettime);
-   if(user_id==null||user_id==""){
-   location.href="http://imnu.52king.cn/jwimnu/jiefeng/error.php";
-   }else{
-  if(gettime<nowtime){
-	location.href="http://imnu.52king.cn/jwimnu/jiefeng/error.php";
-  }
-  }
-</script>
-<script>
-  function is_weixin(){
-    var ua = navigator.userAgent.toLowerCase(); //判断浏览器的类型
-    if(ua.match(/MicroMessenger/i)=="micromessenger") {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 </script>
+
 
 </body>
 </html>
