@@ -1,19 +1,22 @@
-# Find_CET_id
+# CET
+四六级准考证找回
 
-用于根据身份证号找回CET考试的准考证号。
+# 说明
+1. 系统来自另外一个大佬开源(https://github.com/LDouble/CET/)
 
-## 原理
 
-1.使用request访问http://cet-bm.neea.edu.cn/Home/QuickPrintTestTicket
-
-2.构造session，识别验证码，提交表单
-
-3.下载准考证，解压后读取PDF，正则表达式匹配准考证号
-
-4.通过flask框架提供api，接受用户提交并返回
-
-cet.py为cookie登录方式，代码源自https://github.com/LDouble/CET  
-
-BackGround.py为session登录方式，暂时未完成，提交表单后无法登录  
-
-img.py为云打码api的http调用，用于自动识别验证码
+# 使用方法
+1. 按照依赖
+```
+pip install -r requirements.txt
+```
+2. 运行
+```
+python app.py # 测试环境
+gunicorn -c gunc.py app:app # 用gunicorn部署
+```
+# 原理
+1. 利用requests访问http://cet-bm.neea.edu.cn/
+2. 获取验证码，利用flask提供api支持，并返回cookie
+3. 提交后，下载准考证，然后解压并读取pdf用正则进行匹配即可。
+4. 返回给用户
